@@ -74,7 +74,7 @@ func (t *TCPMessage) Bytes() (output []byte) {
 	return output
 }
 
-// Size returns total body size
+// BodySize returns total body size
 func (t *TCPMessage) BodySize() (size int) {
 	if len(t.packets) == 0 || t.headerPacket == -1 {
 		return 0
@@ -225,7 +225,7 @@ func (t *TCPMessage) updateHeadersPacket() {
 	return
 }
 
-// isMultipart returns true if message contains from multiple tcp packets
+// checkIfComplete returns true if the message is complete. If the message is an http request, checks by it's body type.
 func (t *TCPMessage) checkIfComplete() {
 	if t.seqMissing || t.headerPacket == -1 {
 		return
